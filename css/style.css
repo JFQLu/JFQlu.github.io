@@ -461,6 +461,16 @@ textarea {
     line-height: 1.7;
     color: grey;
     margin-bottom: 2rem; }
+  .project-details__desc-code {
+    overflow: scroll;
+    margin-right: 40px;
+    margin-bottom: 20px;
+    margin-left: 40px;
+    flex-wrap: wrap;
+    background-color: var(--swatch_bf9164c1);
+    text-align: left;
+    white-space: nowrap;
+}
 
 .project-details__tools-used {
   margin: 0 0 7rem 0; }
