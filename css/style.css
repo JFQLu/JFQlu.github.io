@@ -62,6 +62,15 @@ button {
 textarea {
   resize: none; }
 
+.python-code-block {
+    position: static;
+    display: block;
+    overflow: scroll;
+    flex-wrap: wrap;
+    background-color: var(--swatch_bf9164c1);
+    text-align: left;
+    white-space: nowrap;
+
 .heading-primary {
   font-size: 6rem;
   text-transform: uppercase;
