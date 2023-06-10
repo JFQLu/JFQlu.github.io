@@ -170,17 +170,13 @@
               <div class="div-code">
                 <p>def smoothen(data,subsequence_length = 16,n=2):</p>    
                 <p>&emsp;if len(data.shape) != 3:</p>    
-                <p class="project-details__desc-code">&emsp;&emsp;print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</p>
-                <p class="project-details__desc-code">&nbsp;</p>
-                <p class="project-details__desc-code">&emsp;# Makes an instance of a flow more coarse by n times.</p>    
-                <p class="project-details__desc-code">&emsp;# print(f"length of flow instance:{len(subsequence)}")</p>    
-                <p class="project-details__desc-code">&emsp;temp = np.split(data, subsequence_length/n,axis=1)</p>    
-                <p class="project-details__desc-code">&emsp;temp = np.array(temp).sum(axis=-2)</p>    
-                <p class="project-details__desc-code">&emsp;return temp</p>
-              </div>
-              
-              <div class="div-code">
-                <p>test</p>
+                <p">&emsp;&emsp;print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</p>
+                <p>&nbsp;</p>
+                <p>&emsp;# Makes an instance of a flow more coarse by n times.</p>    
+                <p>&emsp;# print(f"length of flow instance:{len(subsequence)}")</p>    
+                <p>&emsp;temp = np.split(data, subsequence_length/n,axis=1)</p>    
+                <p>&emsp;temp = np.array(temp).sum(axis=-2)</p>    
+                <p>&emsp;return temp</p>
               </div>
               
               
