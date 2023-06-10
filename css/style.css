@@ -75,6 +75,7 @@ div.div-code p {
   display: inline-block;
   white-space: nowrap;
   text-align: left;
+  line-height: 0.7;
 }
 
 
