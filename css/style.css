@@ -65,7 +65,8 @@ div.div-list {
 div.div-code {
   background-color: #EBEBEB;
   padding: 10px;
-  overflow: auto;
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 textarea {
