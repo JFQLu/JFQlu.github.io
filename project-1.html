@@ -168,9 +168,9 @@
                 A key function used in this process was the smoothen() function which allowed us to create higher time-frame data for extracting features:
               </p>
               <p class="project-details__desc-code">def smoothen(data,subsequence_length = 16,n=2):    
-                if len(data.shape) != 3:      
-                    print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")    
-
+                <div>if len(data.shape) != 3:</div>     
+                <div>    print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</div>
+                
                 # Makes an instance of a flow more coarse by n times.    
                 # print(f"length of flow instance:{len(subsequence)}")    
                 temp = np.split(data, subsequence_length/n,axis=1)    
