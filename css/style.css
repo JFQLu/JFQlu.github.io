@@ -65,18 +65,18 @@ div.div-list {
 div.div-code {
   background-color: #EBEBEB;
   padding: 10px;
+  overflow-x: scroll;
+  white-space: nowrap;
 }
-div.div-code p { 
+div.div-code p {
   font-size: 1.8rem;
-  overflow: scroll;
   margin-right: 40px;
   margin-bottom: 20px;
   margin-left: 40px;
-  flex-wrap: wrap;
   display: inline-block;
-  background-color: var(--swatch_bf9164c1);
-  text-align: left; 
+  text-align: left;
 }
+
 
 textarea {
   resize: none; }
