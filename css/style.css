@@ -493,8 +493,7 @@ textarea {
     flex-wrap: wrap;
     display: inline-block;
     background-color: var(--swatch_bf9164c1);
-    text-align: left;
-    white-space: nowrap; }
+    text-align: left; }
 
 .project-details__tools-used {
   margin: 0 0 7rem 0; }
