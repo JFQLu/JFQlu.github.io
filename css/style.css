@@ -59,12 +59,15 @@ button {
   border: none;
   cursor: pointer; }
 
-textarea {
-  resize: none; }
-
 div.div-list {
   margin-bottom: 2rem;
 }
+div.div-code {
+  background-color: lightblue;
+}
+
+textarea {
+  resize: none; }
 
 .heading-primary {
   font-size: 6rem;
