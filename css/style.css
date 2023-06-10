@@ -62,6 +62,12 @@ button {
 textarea {
   resize: none; }
 
+.div-list {
+  background-color: blue; 
+  height: 50px;
+  width: 50px;
+}
+
 .heading-primary {
   font-size: 6rem;
   text-transform: uppercase;
