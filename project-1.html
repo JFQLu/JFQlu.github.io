@@ -169,14 +169,14 @@
               </p>
               <div class="div-code">
                 <p class="project-details__desc-code">def smoothen(data,subsequence_length = 16,n=2):</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;if len(data.shape) != 3:</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</p>
+                <p class="project-details__desc-code">&emsp;if len(data.shape) != 3:</p>    
+                <p class="project-details__desc-code">&emsp;&emsp;print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</p>
                 <p class="project-details__desc-code">&nbsp;</p>
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;# Makes an instance of a flow more coarse by n times.</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;# print(f"length of flow instance:{len(subsequence)}")</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;temp = np.split(data, subsequence_length/n,axis=1)</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;temp = np.array(temp).sum(axis=-2)</p>    
-                <p class="project-details__desc-code">&nbsp;&nbsp;&nbsp;&nbsp;return temp</p>
+                <p class="project-details__desc-code">&emsp;# Makes an instance of a flow more coarse by n times.</p>    
+                <p class="project-details__desc-code">&emsp;# print(f"length of flow instance:{len(subsequence)}")</p>    
+                <p class="project-details__desc-code">&emsp;temp = np.split(data, subsequence_length/n,axis=1)</p>    
+                <p class="project-details__desc-code">&emsp;temp = np.array(temp).sum(axis=-2)</p>    
+                <p class="project-details__desc-code">&emsp;return temp</p>
               </div>
               
               
