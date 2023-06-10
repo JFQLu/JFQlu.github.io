@@ -74,6 +74,7 @@ div.div-code p {
   margin-left: 40px;
   text-align: left;
   line-height: 0.7;
+  white-space: nowrap;
 }
 
 
