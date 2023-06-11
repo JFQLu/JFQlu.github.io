@@ -212,7 +212,32 @@
                 Once the GMM has been trained, it can be used to classify new data points by determining the distribution that they are most likely to belong to.
               </p>
               <h3 class="project-details__content-title_2">Preprocessing</h3>
-              
+              <p class="project-details__desc-para">
+                First any preprocessing is done including Z-score scaling and/or PCA; note that we perform experiments to determine if scaling or PCA improves model performance.
+              </p>
+              <h3 class="project-details__content-title_2">Compute Optimal Cluster Number</h3>
+              <p class="project-details__desc-para">
+                The elbow method is a technique that is often used to determine the optimal number of clusters to use in a clustering algorithm such as a Gaussian mixture model (GMM). 
+                It is based on the idea that the optimal number of clusters is the point at which the decrease in the sum of squared distances between the points and their closest cluster centres starts to level off.
+              </p>
+              <div class="div-code">
+                <p>def compute_optimal_clusters(train,n_clusters,random_state):</p>    
+                <p>&emsp;print("Calculating optimal number of clusters from elbow method")</p>    
+                <p>&emsp;km = KMeans(random_state=random_state)</p>
+                <p>&emsp;visualizer = KElbowVisualizer(km, k=n_clusters,show=False)</p>
+                <p>&emsp;t1 = time.perf_counter()</p>    
+                <p>&emsp;visualizer.fit(train)</p>    
+                <p>&emsp;t2 = time.perf_counter()</p>    
+                <p>&emsp;optimal_k = visualizer.elbow_value_</p>    
+                <p>&emsp;if optimal_k is None:</p>
+                <p>&nbsp;</p>
+                <p>&emsp;&emsp;optimal_k = 1</p>
+                <p>&nbsp;</p>
+                <p>&emsp;print(f"Optimal number of clusters:{optimal_k}")</p>
+                <p>&emsp;optimal_k_time = t2-t1</p>
+                <p>&emsp;print('Time taken to find optimal clusters:',optimal_k_time,'s')</p>
+                <p>&emsp;return optimal_k, optimal_k_time</p>
+              </div>
               
               
               
