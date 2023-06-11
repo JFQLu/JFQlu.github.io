@@ -59,6 +59,16 @@ button {
   border: none;
   cursor: pointer; }
 
+table {
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
 div.div-list {
   margin-bottom: 2rem;
 }
