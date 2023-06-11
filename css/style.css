@@ -474,12 +474,12 @@ textarea {
     @media only screen and (max-width: 37.5em) {
       .project-details__content-title-1 {
         font-size: 2.4rem; } }
-  .project-details__content-title-2 {
+  .project-details__content-title_2 {
     font-weight: 700;
     font-size: 2.0rem;
     margin-bottom: 3rem; }
     @media only screen and (max-width: 37.5em) {
-      .project-details__content-title-2 {
+      .project-details__content-title_2 {
         font-size: 1.5rem; } }
   .project-details__content-project_heading { 
     font-weight: 700;
