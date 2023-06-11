@@ -484,7 +484,7 @@ textarea {
   .project-details__content-project_heading { 
     font-weight: 700;
     font-size: 3.0rem;
-    margin-bottom: 3rem
+    margin-bottom: 3rem;
     margin-top: 3rem; }
     @media only screen and (max-width: 37.5em) {
       .project-details__content-project_heading {
