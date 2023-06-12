@@ -315,7 +315,7 @@
               <div class="div-code">
                 <p>from bs4 import BeautifulSoup</p>
                 <p>def remove_html_tags(text):</p>
-                <p>&emsp;eturn BeautifulSoup(text).get_text()</p>
+                <p>&emsp;return BeautifulSoup(text).get_text()</p>
                 <p>&nbsp;</p>
                 <p>df_train['text']= df_train['text'].apply(lambda x : remove_html_tags(x))</p>
                 <p>df_test['text'] = df_test['text'].apply(lambda x: remove_html_tags(x))</p>
@@ -324,8 +324,26 @@
               <p class="project-details__desc-para">
                 There may be spelling mistakes in the tweets, these should be corrected to reduce dimensionality/complexity and improve accuracy.
               </p>
+              <div class="div-code">
+                <p>from spellchecker import SpellChecker</p>
+                <p>&nbsp;</p>
+                <p>spell = SpellChecker()</p>
+                <p>def correct_spellings(text):</p>
+                <p>&emsp;corrected_text = []</p>
+                <p>&emsp;misspelled_words = spell.unknown(text.split())</p>
+                <p>&emsp;for word in text.split():</p>
+                <p>&emsp;&emsp;if word in misspelled_words:</p>
+                <p>&emsp;&emsp;&emsp;corrected_text.append(spell.correction(word))</p>
+                <p>&emsp;&emsp;else:</p>
+                <p>&emsp;&emsp;&emsp;corrected_text.append(word)</p>
+                <p>&emsp;return " ".join(corrected_text)</p>
+                <p>&nbsp;</p>
+                <p>df_train['text']=df_train['text'].apply(lambda x : correct_spellings(x))</p>
+                <p>df_test['text'] = df_test['text'].apply(lambda x: correct_spellings(x))</p>
+              </div>
               
               
+            
               
               
               <h3 class="project-details__content-title_1">Feature Engineering</h3>
