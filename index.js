@@ -43,7 +43,6 @@ projects_button.addEventListener('click', (event) => {
     'event': 'button_click'
     'button_name': 'projects_button'
   });
-  console.log('Button clicked')
 });
 
 
