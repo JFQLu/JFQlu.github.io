@@ -201,175 +201,46 @@
                 <p>&emsp;}</p>
                 <p>}</p>
               </div>
-              
-              
-              
-              <h3 class="project-details__content-title_2">Removing HTML tags</h3>
               <p class="project-details__desc-para">
-                HTML tags should be removed as they do not provide information on the sentiment of a tweet.
+                Now we can create the main function:
               </p>
               <div class="div-code">
-                <p>from bs4 import BeautifulSoup</p>
-                <p>def remove_html_tags(text):</p>
-                <p>&emsp;return BeautifulSoup(text).get_text()</p>
+                <p>def main(args: Array[String]) = {</p>
+                <p>&emsp;val conf = new SparkConf().setAppName("GraphX reachable vertices").setMaster("local")</p>
+                <p>&emsp;val sc = new SparkContext(conf)</p>
+                <p>&emsp;val inputFile = args(0)</p>
+                <p>&emsp;val outputFile = args(1)</p>
                 <p>&nbsp;</p>
-                <p>df_train['text']= df_train['text'].apply(lambda x : remove_html_tags(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x: remove_html_tags(x))</p>
-              </div>
-              <h3 class="project-details__content-title_2">Spelling correction</h3>
-              <p class="project-details__desc-para">
-                There may be spelling mistakes in the tweets, these should be corrected to reduce dimensionality/complexity and improve accuracy.
-              </p>
-              <div class="div-code">
-                <p>from spellchecker import SpellChecker</p>
-                <p>&nbsp;</p>
-                <p>spell = SpellChecker()</p>
-                <p>def correct_spellings(text):</p>
-                <p>&emsp;corrected_text = []</p>
-                <p>&emsp;misspelled_words = spell.unknown(text.split())</p>
-                <p>&emsp;for word in text.split():</p>
-                <p>&emsp;&emsp;if word in misspelled_words:</p>
-                <p>&emsp;&emsp;&emsp;corrected_text.append(spell.correction(word))</p>
-                <p>&emsp;&emsp;else:</p>
-                <p>&emsp;&emsp;&emsp;corrected_text.append(word)</p>
-                <p>&emsp;return " ".join(corrected_text)</p>
-                <p>&nbsp;</p>
-                <p>df_train['text']=df_train['text'].apply(lambda x : correct_spellings(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x: correct_spellings(x))</p>
-              </div>
-              <h3 class="project-details__content-title_2">Removing Stop Words</h3>
-              <p class="project-details__desc-para">
-                Finally, we remove stop words such as "in", "on", "with", "by" and "for" since these do not provide much information on the sentiment of tweets and will only add unnecessary complexity to our models.
-              </p>
-              <p class="project-details__desc-para">
-                First, we create a string version containing a list of words for further EDA,
-              </p>
-              <div class="div-code">
-                <p>df_train['temp_list'] = df_train['text'].apply(lambda x:str(x).split())</p>
-                <p>&nbsp;</p>
-                <p># Str version for EDA</p>
-                <p>def correct_spellings(text):</p>
-                <p>def remove_stopword(x):</p>
-                <p>&emsp;return [y for y in x if y not in stopwords.words('english')]</p>
-                <p>&emsp;df_train['temp_list'] = df_train['temp_list'].apply(lambda x:remove_stopword(x))</p>
+                <p>&emsp;val edges = sc.textFile(inputFile)</p>
+                <p>&emsp;// Create the graph</p>
+                <p>&emsp;val edgelist = edges.map(x => x.split(" ")).map(x=> Edge(x(1).toLong, x(2).toLong, 1d))</p>
+                <p>&emsp;val graph = Graph.fromEdges[Double, Double](edgelist, 0.0)</p>
+                <p>&emsp;// Initialize each vertex attribute to empty list (List[VertexId]())</p>
+                <p>&emsp;val initialGraph = graph.mapVertices((id, _) => List[VertexId]())</p>
+                <p>&emsp;val result = initialGraph</p>
+                <p>&emsp;&emsp;&emsp;&nbsp;.pregel(</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&nbsp;initialMsg = List.empty[VertexId],</p>
+                <p>&emsp;&emsp;&emsp;&emsp;&nbsp;activeDirection = EdgeDirection.Out</p>
+                <p>&emsp;&emsp;&emsp;&nbsp;)(vertexProgram, sendMsg, mergeMsg)</p>
+                <p>&emsp;&emsp;&emsp;&nbsp;.mapVertices((_, neighbors) => neighbors.length).vertices.sortBy(_._1).filter(t => t._2 != Double.PositiveInfinity).map(a => a._1 + ":" + a._2).saveAsTextFile(outputFile)</p>
+                <p>}</p>
               </div>
               <p class="project-details__desc-para">
-                we also create a text version which will be used for TF-IDF vectorisation later.
+                Note that input is in the format "EdgeId FromNodeId ToNodeId" and output in the format "VertexId:Number_of_reachable_vertices"
               </p>
-              <div class="div-code">
-                <p># Text version for tfidf vectorisation</p>
-                <p>import nltk</p>
-                <p>nltk.download('stopwords')</p>
-                <p>def remove_stopword(x):</p>
-                <p>&emsp;new = ""</p>
-                <p>&emsp;for y in x.split():</p>
-                <p>&emsp;&emsp;if y not in stopwords.words('english'):</p>
-                <p>&emsp;&emsp;&emsp;new = f'{new}{y} '</p>
-                <p>&emsp;return new.rstrip()</p>
-                <p>df_train['text'] = df_train['text'].apply(lambda x:remove_stopword(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x:remove_stopword(x))</p>
-              </div>
-              <h3 class="project-details__content-title_1">Post-Preprocessing Data Exploration</h3>
+              <h3 class="project-details__content-title_2">Takeaway:</h3>
               <p class="project-details__desc-para">
-                Now that preprocessing has been done we have a look at the most common words in each sentiment class. First, lets separate the sentiments.
-              </p>
-              <div class="div-code">
-                <p>Pt_sent = df_train[df_train['sentiment']==1]</p>
-                <p>Ng_sent = df_train[df_train['sentiment']==-1]</p>
-                <p>Nt_sent = df_train[df_train['sentiment']==0]</p>
-              </div>
-              <p class="project-details__desc-para">
-                Now we look at the most common words for each class.
-              </p>
-              <div class="div-code">
-                <p>from collections import Counter</p>
-                <p># Most common words for each sentiment</p>
-                <p>for sentiment in [(Pt_sent, 'Greens'), (Nt_sent, 'Blues'), (Ng_sent, 'Reds')]:</p>
-                <p>&emsp;top = Counter([item for sublist in sentiment[0]['temp_list'] for item in sublist])</p>
-                <p>&emsp;temp_sent = pd.DataFrame(top.most_common(20))</p>
-                <p>&emsp;temp_sent.columns = ['Common_words','count']</p>
-                <p>&emsp;display(temp_sent.style.background_gradient(cmap=sentiment[1]))</p>
-              </div>
-              <img
-                src="./assets/jpeg/tsa_most_common_words.jpg"
-                alt="Project Image Hero"
-                class="project-details__showcase-img"
-              />
-              <h3 class="project-details__content-title_1">Modeling</h3>
-              <h3 class="project-details__content-title_2">TF-IDF</h3>
-              <p class="project-details__desc-para">
-                TF-IDF (Term Frequency-Inverse Document Frequency) is a common technique used in natural language processing (NLP) to represent the importance of words in a document. 
-                It is typically used to transform text data into numerical vectors that can be used as input to machine learning models.
-              </p>
-              <p class="project-details__desc-para">
-                We will be applying this vectorizer to our pre-processed data to extract features for our machine learning models.
-              </p>
-              <div class="div-code">
-                <p>from sklearn.feature_extraction.text import TfidfVectorizer</p>
-                <p>vectorizer = TfidfVectorizer(max_features=1024)</p>
-                <p>X_train = vectorizer.fit_transform(df_train['text'])</p>
-                <p>X_train = np.array(X_train.toarray())</p>
-                <p>y_train = np.array(df_train['sentiment'])</p>
-                <p>&nbsp;</p>
-                <p>X_test = vectorizer.transform(df_test['text'])</p>
-                <p>X_test = np.array(X_test.toarray())</p>
-                <p>y_test = np.array(df_test['sentiment'])</p>
-              </div>
-              <h3 class="project-details__content-title_1">Logistic Regression</h3>
-              <p class="project-details__desc-para">
-                The first model we will be training is the logistic regression. 
-                Logistic regression is a generalised linear model and assumes that the data follows a Bernoulli distribution. 
-                Logistic regression solves for the parameters by maximising the likelihood function and applying gradient descent. 
-                The structure of the logistic regression model is simple and interpretable, and the influence of different features on the final results can be seen from the weights of the features.
-              </p>
-              <p class="project-details__desc-para">
-                We use the sklearn implementation of logistic regression and grid-search for hyperparameter tuning.
-              </p>
-              <div class="div-code">
-                <p>from sklearn.model_selection import GridSearchCV</p>
-                <p>from sklearn.linear_model import LogisticRegression</p>
-                <p>grid={"C":np.linspace(0,10,11), "penalty":["l1","l2"]}# l1 lasso l2 ridge</p>
-                <p>logreg=LogisticRegression()</p>
-                <p>logreg_cv=GridSearchCV(logreg,grid,cv=10)</p>
-                <p>logreg_cv.fit(X_train,y_train)</p>
-                <p>&nbsp;</p>
-                <p>print("tuned hpyerparameters :(best parameters) ",logreg_cv.best_params_)</p>
-                <p>print("accuracy :",logreg_cv.best_score_)</p>
-              </div>
-              <p class="project-details__desc-para">
-                We can then use this model to predict on the training set.
-              </p>
-              <div class="div-code">
-                <p>clf = LogisticRegression(penalty=logreg_cv.best_params_['penalty'], C=logreg_cv.best_params_['C'])</p>
-                <p>clf.fit(X_train, y_train)</p>
-                <p>y_pred = clf.predict(X_test)</p>
-                <p>print('test acc: %.2f%%, test f1 score: %.4f' % (100 * accuracy_score(y_test, y_pred), f1_score(y_test, y_pred, average='weighted')))</p>
-              </div>
-              <div class="div-list">
-                <ul>
-                  <li>
-                    <p class="project-details__desc-list_ele">&bull; Test accuracy = 68.48%</p>
-                  </li>
-                  <li>
-                    <p class="project-details__desc-list_ele">&bull; Test f1 score = 0.6849</p>
-                  </li>
-                </ul>
-              </div>
-              <p class="project-details__desc-para">
-                Multilayer Perceptron - details to be added
+                From this project we see the power of GraphX for graph processing applications. It is useful for a wide range of applications that involve graph data, 
+                such as social network analysis, recommendation systems, and fraud detection.
               </p>
             </div> 
             <div class="project-details__tools-used">
-              <h3 class="project-details__content-title_1">Tools Used</h3>
+              <h3 class="project-details__content-title_1">Skills</h3>
               <div class="skills">
-                <div class="skills__skill">Python</div>
-                <div class="skills__skill">Sklearn</div>
-                <div class="skills__skill">Natural Language Processing</div>
-                <div class="skills__skill">Machine Learning</div>
-                <div class="skills__skill">Deep Learning</div>
-                <div class="skills__skill">Jupyter</div>
-                <div class="skills__skill">Matplotlib</div>
-                <div class="skills__skill">Seaborn</div>
+                <div class="skills__skill">Spark</div>
+                <div class="skills__skill">Scala</div>
+                <div class="skills__skill">Pregel - GraphX</div>
+                <div class="skills__skill">Graph Theory</div>
               </div>
             </div>
             <!---
