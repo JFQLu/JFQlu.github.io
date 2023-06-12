@@ -308,6 +308,22 @@
                 <p>df_train['text']= df_train['text'].apply(lambda x : lower_text_and_remove_special_chars(x))</p>
                 <p>df_test['text'] = df_test['text'].apply(lambda x: lower_text_and_remove_special_chars(x))</p>
               </div>
+              <h3 class="project-details__content-title_2">Removing HTML tags</h3>
+              <p class="project-details__desc-para">
+                HTML tags should be removed as they do not provide information on the sentiment of a tweet.
+              </p>
+              <div class="div-code">
+                <p>from bs4 import BeautifulSoup</p>
+                <p>def remove_html_tags(text):</p>
+                <p>&emsp;eturn BeautifulSoup(text).get_text()</p>
+                <p>&nbsp;</p>
+                <p>df_train['text']= df_train['text'].apply(lambda x : remove_html_tags(x))</p>
+                <p>df_test['text'] = df_test['text'].apply(lambda x: remove_html_tags(x))</p>
+              </div>
+              <h3 class="project-details__content-title_2">Spelling correction</h3>
+              <p class="project-details__desc-para">
+                There may be spelling mistakes in the tweets, these should be corrected to reduce dimensionality/complexity and improve accuracy.
+              </p>
               
               
               
