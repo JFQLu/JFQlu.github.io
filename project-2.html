@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Case Study of Project 2</title>
-    <meta name="description" content="Case study page of Project" />
+    <title>Tweet Sentiment Analysis</title>
+    <meta name="description" content="Tweet Sentiment Analysis" />
 
     <link rel="stylesheet" href="css/style.css" />
 
@@ -22,12 +22,12 @@
         <div class="header__logo-container">
           <div class="header__logo-img-cont">
             <img
-              src="./assets/png/john-doe.png"
-              alt="Ram Maheshwari Logo Image"
+              src="./assets/png/james_lu.png"
+              alt="James Lu Logo Image"
               class="header__logo-img"
             />
           </div>
-          <span class="header__logo-sub">John Doe</span>
+          <span class="header__logo-sub">James Lu</span>
         </div>
         <div class="header__main">
           <ul class="header__links">
@@ -82,14 +82,13 @@
         </div>
       </div>
     </header>
+    <!--- Hero Section
     <section class="project-cs-hero">
       <div class="project-cs-hero__content">
-        <h1 class="heading-primary">Project 2</h1>
+        <h1 class="heading-primary">Tweet Sentiment Analysis</h1>
         <div class="project-cs-hero__info">
           <p class="text-primary">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos
-            in numquam incidunt earum quaerat cum fuga, atque similique natus
-            nobis sit.
+            Predictive analysis and
           </p>
         </div>
         <div class="project-cs-hero__cta">
@@ -97,55 +96,348 @@
         </div>
       </div>
     </section>
+    --->
     <section class="project-details">
       <div class="main-container">
         <div class="project-details__content">
+          <h3 class="project-details__content-project_heading">Network Anomaly Detection</h3>
+          <!--- Hero Image
           <div class="project-details__showcase-img-cont">
             <img
-              src="./assets/jpeg/project-mockup-example.jpeg"
-              alt="Project Image"
+              src="./assets/jpeg/network_anomaly_detection_hero_img.jpg"
+              alt="Project Image Hero"
               class="project-details__showcase-img"
             />
           </div>
+          ---> 
           <div class="project-details__content-main">
             <div class="project-details__desc">
-              <h3 class="project-details__content-title">Project Overview</h3>
+              <h3 class="project-details__content-title_1">Project Overview</h3>
               <p class="project-details__desc-para">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                alias tenetur minus quaerat aliquid, aut provident blanditiis,
-                deleniti aspernatur ipsam eaque veniam voluptatem corporis vitae
-                mollitia laborum corrupti ullam rem. Lorem ipsum dolor sit amet
-                consectetur adipisicing elit. Neque alias tenetur minus quaerat
-                aliquid, aut provident blanditiis, deleniti aspernatur ipsam
-                eaque veniam voluptatem corporis vitae mollitia laborum corrupti
-                ullam rem?
+                In the fast-paced world of social media, it is critical to accurately identify the sentiment expressed in online communication, as it can have a significant impact on a company's brand and profitability. 
+                With the constant flow of tweets, it can be difficult to determine whether a particular message will go viral in a positive way or have a negative impact on the brand. 
+                Capturing and understanding the sentiment conveyed through language is crucial for making timely and informed decisions. 
+                However, accurately identifying the specific words that contribute to the overall sentiment can be challenging.
+              </p>
+              <h3 class="project-details__content-title_1">Background</h3>
+              <p class="project-details__desc-para">
+                The Kaggle competition <a href="https://www.kaggle.com/competitions/tweet-sentiment-extraction/overview">Tweet Sentiment Extraction</a> embodies the fundamental ideas of sentiment analysis. 
+                This challenge requires the participants to look at the labelled sentiment for a given tweet and determine the word or phrase that best supports it. 
+                I will be using this data for this project. 
+                For this project, I will be focussing on the classification of the sentiment for each tweet and optimisation of the implementation. 
+                I believe that this deliverable would be more useful for a company looking to do sentiment analysis on their own customers.
+              </p>
+              <h3 class="project-details__content-title_1">Data</h3>
+              <p class="project-details__desc-para">
+                The data provided contained time series network data including packet/byte counts in/out of a number of ports of a number of devices. 
+                Below is a snapshot:
+              </p>
+              <div class="div-code">
+                <p>data.info()</p>
+              </div>
+              <img
+                src="./assets/jpeg/nad_data_info.jpg"
+                alt="Project Image Hero"
+                class="project-details__showcase-img"
+              />
+              <p class="project-details__desc-para">
+                Here we hypothesise if we are able to classify a new datapoint into a particular flow we are able to observe when an anomaly occurs.
+              </p>
+              <h3 class="project-details__content-title_1">Exploratory Data Analysis</h3>
+              <p class="project-details__desc-para">
+                Our team began by analysing and understanding the provided data. 
+                Python was used to calculate statistics and matplotlib and seaborn packages were utilised to visualise the shape and trends of the time series data. 
+                Key observations include:
+              </p>
+              <div class="div-list">
+                <ul>
+                  <li>
+                    <p class="project-details__desc-list_ele">&bull; There was high correlation between corresponding in and out flows of each port</p>
+                  </li>
+                  <li>
+                    <p class="project-details__desc-list_ele">&bull; There were distinct characteristics to each flow type (this is what we want for accurate classification)</p>
+                  </li>
+                </ul>
+              </div>
+              <h3 class="project-details__content-title_1">Feature Engineering</h3>
+              <p class="project-details__desc-para">
+                Our solution begins with the feature extraction step. 
+                This involved transforming raw training and testing data (provided by CyAmast) into training and testing feature datasets for subsequence sizes of 16, 32, 64, and 128. 
+                Note, we define a subsequence as a sequence of contiguous data from the original dataset which is transformed into a single instance in the feature datasets. 
+                The feature dataset contains 8 features for each labelled flow subsequence: average packet and byte counts for 1-, 2-, 4-, and 8-minute time frames. 
+                Furthermore, all observations which have only 0s in their 8 features were dropped from the dataset.
               </p>
               <p class="project-details__desc-para">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque
-                alias tenetur minus quaerat aliquid, aut provident blanditiis,
-                deleniti aspernatur ipsam eaque veniam voluptatem corporis vitae
-                mollitia laborum corrupti ullam rem?
+                A key function used in this process was the smoothen() function which allowed us to create higher time-frame data for extracting features:
               </p>
-            </div>
+              <div class="div-code">
+                <p>def smoothen(data,subsequence_length = 16,n=2):</p>    
+                <p>&emsp;if len(data.shape) != 3:</p>    
+                <p>&emsp;&emsp;print("Subsequence is of wrong shape for our purposes, should be 3 dimensional --> (n_observations, subsequence size, n_original_features).")</p>
+                <p>&nbsp;</p>
+                <p>&emsp;# Makes an instance of a flow more coarse by n times.</p>    
+                <p>&emsp;# print(f"length of flow instance:{len(subsequence)}")</p>    
+                <p>&emsp;temp = np.split(data, subsequence_length/n,axis=1)</p>    
+                <p>&emsp;temp = np.array(temp).sum(axis=-2)</p>    
+                <p>&emsp;return temp</p>
+              </div>
+              <h3 class="project-details__content-title_1">Model Training</h3>
+              <p class="project-details__desc-para">
+                For this project we wanted to compare the effectiveness and logistics of both single-class and multi-class machine learning models in classifying network flows. 
+                For this reason we tackled this probelm with both single- and multi-class models.
+              </p>
+              <table>
+                <tr>
+                  <th><p class="project-details__desc-para">Single-Class</p></th>
+                  <th><p class="project-details__desc-para">Multi-Class</p></th>
+                </tr>
+                <tr>
+                  <td><p class="project-details__desc-para">GMM, K-Means, Fuzzy C-Means</p></td>
+                  <td><p class="project-details__desc-para">Random Forest, XGBoost, AdaBoost, SVM, MLP, Logistic Regression</p></td>
+                </tr>
+              </table>
+              <p class="project-details__desc-para">
+                This blog will deep dive into the one-class Gaussian Mixture Model and the multi-class Random Forest models.
+              </p>
+              <h3 class="project-details__content-title_1">Gaussian Mixture Model</h3>
+              <p class="project-details__desc-para">
+                A Gaussian mixture model (GMM) is a unsupervised probabilistic model that assumes that the data is generated from a mixture of several different Gaussian distributions. 
+                It is often used for classification tasks because it allows for the modeling of complex, multimodal distributions and can handle data with uncertainty or incomplete information.
+              </p>
+              <p class="project-details__desc-para">
+                In a GMM, each data point is assumed to belong to one of the Gaussian distributions in the mixture, 
+                and the model estimates the probability that a given data point belongs to each of the different distributions. 
+                The model can then classify a new data point based on which distribution it is most likely to belong to.
+              </p>
+              <p class="project-details__desc-para">
+                Once the GMM has been trained, it can be used to classify new data points by determining the distribution that they are most likely to belong to.
+              </p>
+              <h3 class="project-details__content-title_2">Preprocessing</h3>
+              <p class="project-details__desc-para">
+                First any preprocessing is done including Z-score scaling and/or PCA; note that we perform experiments to determine if scaling or PCA improves model performance.
+              </p>
+              <h3 class="project-details__content-title_2">Compute Optimal Cluster Number</h3>
+              <p class="project-details__desc-para">
+                The elbow method is a technique that is often used to determine the optimal number of clusters to use in a clustering algorithm such as a Gaussian mixture model (GMM). 
+                It is based on the idea that the optimal number of clusters is the point at which the decrease in the sum of squared distances between the points and their closest cluster centres starts to level off.
+              </p>
+              <div class="div-code">
+                <p>def compute_optimal_clusters(train,n_clusters,random_state):</p>    
+                <p>&emsp;print("Calculating optimal number of clusters from elbow method")</p>    
+                <p>&emsp;km = KMeans(random_state=random_state)</p>
+                <p>&emsp;visualizer = KElbowVisualizer(km, k=n_clusters,show=False)</p>
+                <p>&emsp;t1 = time.perf_counter()</p>    
+                <p>&emsp;visualizer.fit(train)</p>    
+                <p>&emsp;t2 = time.perf_counter()</p>    
+                <p>&emsp;optimal_k = visualizer.elbow_value_</p> 
+                <p>&nbsp;</p>
+                <p>&emsp;if optimal_k is None:</p>
+                <p>&emsp;&emsp;optimal_k = 1</p>
+                <p>&nbsp;</p>
+                <p>&emsp;print(f"Optimal number of clusters:{optimal_k}")</p>
+                <p>&emsp;optimal_k_time = t2-t1</p>
+                <p>&emsp;print('Time taken to find optimal clusters:',optimal_k_time,'s')</p>
+                <p>&emsp;return optimal_k, optimal_k_time</p>
+              </div>
+              <p class="project-details__desc-para">
+                The above function returns us the optimal number of clusters optimal_k.
+              </p>
+              <h3 class="project-details__content-title_2">Model Training</h3>
+              <div class="div-code">
+                <p># Training a GMM using optimal number of clusters</p>    
+                <p>gmm, training_time= fit_gmm(train,optimal_k,random_state = random_state,flow_type = flow_type)</p>    
+              </div>
+              <p class="project-details__desc-para">
+                The model is trained using Sklearn's implementation of GMM. This model is then stored for testing.
+              </p>
+              <h3 class="project-details__content-title_2">Model Testing</h3>
+              <p class="project-details__desc-para">
+                Testing the GMM follows the following algorithm:
+              </p>
+              <div class="div-code">
+                <p>INPUT:</p>    
+                <p>&emsp;Test feature data of same subsequence size as training feature data</p>    
+                <p>&emsp;Set of trained GMM classification models</p> 
+                <p>&emsp;Z-score scaler if scale = True</p> 
+                <p>&emsp;PCA scaler if PCA = True</p> 
+                <p>&nbsp;</p>
+                <p>OUTPUT:</p> 
+                <p>&emsp;Network flow predictions on test feature data</p>
+                <p>&nbsp;</p>
+                <p>ALGORITHM:</p>
+                <p>&emsp;for each network flow do:</p>
+                <p>&emsp;&emsp;(1) if scale = True then</p>
+                <p>&emsp;&emsp;&emsp;Scale each feature from test data using z-score scalar from training data;</p>
+                <p>&emsp;&emsp;(2) if PCA = True then</p>
+                <p>&emsp;&emsp;&emsp;Obtain principal components using PCA scalar on features and reduce dimensions using minimal principal components;</p>
+                <p>&emsp;&emsp;(3) Predict closest cluster to step 1 and 2 result, using all cluster models;</p>
+                <p>&emsp;&emsp;(4) Record distance between all closest clusters and step 1 and 2 result;</p>
+                <p>&emsp;end</p>
+                <p>&emsp;(5) For each test data point, select cluster model with minimum distance predicted as winner model;</p>
+                <p>&emsp;(6) Use winner model's flow as predictions;</p>
+              </div>   
+              <p class="project-details__desc-para">
+                For single-class classifiers like GMM we need to produce a model for each class. 
+                Predicting with single-class models such as GMM is more complicated then multi-class models due to the need for conflict resolution when the probablity measures are the same for more than one class (network flow).
+              </p>
+              <h3 class="project-details__content-title_1">Random Forest</h3>
+              <p class="project-details__desc-para">
+                Random Forest (RF) is a supervised machine learning algorithm for classification and regression. 
+                It is an ensemble method meaning it combines the predictions of multiple decision trees trained on different subsets of the data, and makes a final prediction by taking the mode or mean of the individual predictions. 
+                It is effective at handling high-dimensional and sparse data, and is resistant to overfitting. It is also relatively easy to implement and interpret.
+              </p>
+              <h3 class="project-details__content-title_2">Preprocessing</h3>
+              <p class="project-details__desc-para">
+                Since RF is a supervised ML model we need to create labels in our feature data. This can be done by applying the following function to the data.
+              </p>
+              <div class="div-code">
+                <p>def convert_one_class_to_multi_class(df):</p>    
+                <p>&emsp;'''</p>    
+                <p>&emsp;This function converts the feature_subsequence dataset to make it suitable for multi-class.</p> 
+                <p>&emsp;Note that columns that are not relevant to features (such as time/device_mac) will be removed. </p> 
+                <p>&nbsp;</p>
+                <p>&emsp;It will change the shape of the dataset from "wide" to "long", with the flow types assigned as a separate new column.</p> 
+                <p>&emsp;NOTE: The input MUST be dataframe of features computed from subsequences.</p>
+                <p>&emsp;'''</p>
+                <p>&emsp;# Extract relevant column flow names, and feature names from the column names</p>
+                <p>&emsp;if 'time' in df.columns:</p>
+                <p>&emsp;&emsp;df = df.drop(['time'],axis=1)</p>
+                <p>&emsp;if 'device_mac' in df.columns:</p>
+                <p>&emsp;&emsp;df = df.drop(['device_mac'],axis=1)</p>
+                <p>&nbsp;</p>
+                <p>&emsp;cols = [c for c in df.columns]</p>
+                <p>&emsp;flows = [extract_flow_from_column(c) for c in cols]</p>
+                <p>&emsp;features = [extract_feature_from_column(c) for c in cols]</p>
+                <p>&nbsp;</p>
+                <p>&emsp;# Create a multi-level column with the extracted names</p>
+                <p>&emsp;new_columns = list(zip(flows,features,cols))</p>
+                <p>&emsp;df.columns=pd.MultiIndex.from_tuples(new_columns)</p>
+                <p>&emsp;# Stack the dataframe -</p>
+                <p>&emsp;# This will place the columns at the flow level, and original level into the rows. The end result will be our feature names will be the remaining columns</p>
+                <p>&emsp;df = df.stack(level= [0,2])</p>
+                <p>&emsp;# Condense the stacked dataframe by summing -</p>
+                <p>&emsp;# After stacking, there will be a lot of null values for observations that didn't exist.</p>
+                <p>&emsp;# We can get rid of these observations using a group by and sum, since the nulls will be treated as 0 in a sum operation.</p>
+                <p>&emsp;df = df.groupby(level = [0,1]).sum()</p>
+                <p>&emsp;# Finally, reset index and rename accordingly</p>
+                <p>&emsp;df = df.reset_index().drop('level_0',axis=1).rename({'level_1':'FlowType'},axis=1)</p>
+                <p>&nbsp;</p>
+                <p>&emsp;return df</p>
+              </div>   
+              <h3 class="project-details__content-title_2">Model Training</h3>
+              <p class="project-details__desc-para">
+                Once we have labelled data we can simply train the RF model using Sklearn's implementation.
+              </p>
+              <div class="div-code">
+                <p>rf = RandomForestClassifier(n_estimators=n_trees, random_state=random_state).fit(X_train,y_train)</p>
+              </div>
+              <h3 class="project-details__content-title_2">Model Testing</h3>
+              <p class="project-details__desc-para">
+                Unlike GMM, only one model needs to be trained to classify all classes, no conflict resolution is required either. We only need one line to predict the class of any segment of network flow.
+              </p>
+              <div class="div-code">
+                <p>y_pred = model.predict(X_test)</p>
+              </div>
+              <h3 class="project-details__content-title_1">Experiment Results</h3>
+              <h3 class="project-details__content-title_2">Layer 1 Results</h3>
+              <p class="project-details__desc-para">
+                Best experiment results for each one-class model for layer 1
+              </p>
+              <img
+              src="./assets/jpeg/nad_layer1_oneclass.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <p class="project-details__desc-para">
+                Best experiment results for each multi-class model for layer 1
+              </p>
+              <img
+              src="./assets/jpeg/nad_layer1_multiclass.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <h3 class="project-details__content-title_2">Layer 2 Results</h3>
+              <img
+              src="./assets/jpeg/nad_layer2.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <h3 class="project-details__content-title_1">Conclusion</h3>
+              <img
+              src="./assets/jpeg/nad_conclusion.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <h3 class="project-details__content-title_2">Scalability Argument</h3>
+              <p class="project-details__desc-para">
+                To justify our overall final winning model, we need to briefly introduce the scalability argument. 
+                We take into account the advantage of one-class models like GMM over multi-class models where adding one new network flow would only require one new model to be trained, 
+                whilst the same scenario for multi-class models like random forest would require the entire model to be retrained over the new set of network flows.
+              </p>
+              <p class="project-details__desc-para">
+                However, we believe that the trade-off between time and performance is worthwhile. 
+                Retraining the Random Forest would take ~10 minutes, and weighted average precision will be maintained at ~99%. 
+                Alternatively, retraining GMM will take ~1 minute but weighted average precision will only be at the level about 87%.
+              </p>
+              <p class="project-details__desc-para">
+                Considering that the overall problem context is within the cybersecurity area, we should prioritise the weighted average precision metric over the slightly inferior training and testing times of Random Forest with respect to GMM.
+              </p>
+              <p class="project-details__desc-para">
+                Thus, the winning model of our classification task is <b>Random Forest</b>.
+              </p>
+              <h3 class="project-details__content-title_1">Extending to Anomaly Detection</h3>
+              <p class="project-details__desc-para">
+                To integrate our ML solution into practice and extend its capabilities to anomaly detection we can simply observe if and when a particular flow's classification (or probability) deviates away from the actual flow in which the data is being collected from.
+              </p>
+              <h3 class="project-details__content-title_1">Best GMM and Random Forest - Confusion Matrix and Classification Report</h3>
+              <p class="project-details__desc-para">
+                Gaussian Mixture Models:
+              </p>
+              <img
+              src="./assets/jpeg/nad_gmm_cm.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <p class="project-details__desc-para">
+                Random Forest:
+              </p>
+              <img
+              src="./assets/jpeg/nad_rf_cm.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <h3 class="project-details__content-title_1">Final Thoughts</h3>
+              <p class="project-details__desc-para">
+                Throughout this project, I gained valuable insights into various technologies and concepts related to network anomaly detection, IoT devices, and machine learning models. 
+                I learned how to effectively preprocess and transform raw data into suitable formats for analysis and model implementation.
+              </p>
+              <p class="project-details__desc-para">
+                I deepened my understanding of different machine learning models and their applicability to network flow classification. 
+                I also explored the differences between single-class and multi-class models, evaluating their effectiveness and scalability.
+              </p>
+              <p class="project-details__desc-para">
+                Furthermore, I developed the skills to integrate machine learning solutions into practice and extend their capabilities to anomaly detection by observing deviations in flow classification. 
+                This project allowed me to enhance my knowledge of data analysis, feature engineering, and model training and testing, providing a strong foundation for future work in network security and machine learning applications.
+              </p>
+              <p class="project-details__desc-para">
+                Last but not least, I gained valuable experience working on a data science team, with other extremely capable individuals to drive useful data insights.
+              </p>
+            </div> 
             <div class="project-details__tools-used">
-              <h3 class="project-details__content-title">Tools Used</h3>
+              <h3 class="project-details__content-title_1">Tools Used</h3>
               <div class="skills">
-                <div class="skills__skill">HTML</div>
-                <div class="skills__skill">CSS</div>
-                <div class="skills__skill">JavaScript</div>
-                <div class="skills__skill">React</div>
-                <div class="skills__skill">SASS</div>
-                <div class="skills__skill">GIT</div>
-                <div class="skills__skill">Shopify</div>
-                <div class="skills__skill">Wordpress</div>
-                <div class="skills__skill">Google ADS</div>
-                <div class="skills__skill">Facebook Ads</div>
-                <div class="skills__skill">Android</div>
-                <div class="skills__skill">IOS</div>
+                <div class="skills__skill">Python</div>
+                <div class="skills__skill">Sklearn</div>
+                <div class="skills__skill">Machine Learning</div>
+                <div class="skills__skill">Deep Learning</div>
+                <div class="skills__skill">Jupyter</div>
+                <div class="skills__skill">Matplotlib</div>
+                <div class="skills__skill">Seaborn</div>
               </div>
             </div>
+            <!---
             <div class="project-details__links">
-              <h3 class="project-details__content-title">See Live</h3>
+              <h3 class="project-details__content-title_1">See Live</h3>
               <a
                 href="#"
                 class="btn btn--med btn--theme project-details__links-btn"
@@ -159,6 +451,7 @@
                 >Code Link</a
               >
             </div>
+            --->
           </div>
         </div>
       </div>
@@ -185,43 +478,14 @@
                   alt="icon"
                 />
               </a>
-              <a target="_blank" rel="noreferrer" href="#">
-                <img
-                  class="main-footer__icon"
-                  src="./assets/png/twitter-ico.png"
-                  alt="icon"
-                />
-              </a>
-              <a target="_blank" rel="noreferrer" href="#">
-                <img
-                  class="main-footer__icon"
-                  src="./assets/png/yt-ico.png"
-                  alt="icon"
-                />
-              </a>
-              <a target="_blank" rel="noreferrer" href="#">
-                <img
-                  class="main-footer__icon main-footer__icon--mr-none"
-                  src="./assets/png/insta-ico.png"
-                  alt="icon"
-                />
-              </a>
             </div>
           </div>
           <div class="main-footer__row main-footer__row-2">
-            <h4 class="heading heading-sm text-lt">John Doe</h4>
+            <h4 class="heading heading-sm text-lt">James Lu</h4>
             <p class="main-footer__short-desc">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit facilis
-              tempora explicabo quae quod deserunt
+              Getting the most out of data...
             </p>
           </div>
-        </div>
-
-        <div class="main-footer__lower">
-          &copy; Copyright 2021. Made by
-          <a rel="noreferrer" target="_blank" href="https://rammaheshwari.com"
-            >Ram Maheshwari</a
-          >
         </div>
       </div>
     </footer>
