@@ -156,23 +156,30 @@
                   </li>
                 </ul>
               </div>
+              <div class="div-code">
+                <p>df_train = df_train.drop(['textID', 'selected_text'], axis=1)</p>
+                <p>df_train['sentiment'] = df_train['sentiment'].apply(lambda x: 1 if x == 'positive' else 0 if x == 'neutral' else -1)</p>
+                <p>&nbsp;</p>
+                <p>df_test = df_test.drop(['textID'], axis=1)</p>
+                <p>df_test['sentiment'] = df_test['sentiment'].apply(lambda x: 1 if x == 'positive' else 0 if x == 'neutral' else -1)</p>  
+              </div>
               
               <h3 class="project-details__content-title_1">Exploratory Data Analysis</h3>
               <p class="project-details__desc-para">
-                Our team began by analysing and understanding the provided data. 
-                Python was used to calculate statistics and matplotlib and seaborn packages were utilised to visualise the shape and trends of the time series data. 
-                Key observations include:
+                First we look at the label distribution in the training data.
               </p>
-              <div class="div-list">
-                <ul>
-                  <li>
-                    <p class="project-details__desc-list_ele">&bull; There was high correlation between corresponding in and out flows of each port</p>
-                  </li>
-                  <li>
-                    <p class="project-details__desc-list_ele">&bull; There were distinct characteristics to each flow type (this is what we want for accurate classification)</p>
-                  </li>
-                </ul>
+              <div class="div-code">
+                <p>label = df_train['sentiment'].value_counts()</p>
+                <p>df_label = pd.DataFrame({'label_name':label.index[0:],'fre':label.values[0:]})</p>
+                <p>&nbsp;</p>
+                <p>plt.pie(df_label.fre,labels=df_label.label_name,autopct='%1.2f%%')</p>
+                <p>plt.legend()</p>
+                <p>plt.show()</p>
               </div>
+              
+              
+              
+              
               <h3 class="project-details__content-title_1">Feature Engineering</h3>
               <p class="project-details__desc-para">
                 Our solution begins with the feature extraction step. 
