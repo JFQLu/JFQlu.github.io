@@ -129,20 +129,34 @@
               </p>
               <h3 class="project-details__content-title_1">Data</h3>
               <p class="project-details__desc-para">
-                The data provided contained time series network data including packet/byte counts in/out of a number of ports of a number of devices. 
-                Below is a snapshot:
+                The raw data contains the columns textID, text, selected_text, and sentiment. This can be downloaded from Kaggle.
               </p>
               <div class="div-code">
                 <p>data.info()</p>
               </div>
               <img
-                src="./assets/jpeg/nad_data_info.jpg"
+                src="./assets/jpeg/sa_data_info.jpg"
                 alt="Project Image Hero"
                 class="project-details__showcase-img"
               />
               <p class="project-details__desc-para">
-                Here we hypothesise if we are able to classify a new datapoint into a particular flow we are able to observe when an anomaly occurs.
+                We can remove the selected_text column since the sentiment analysis will be performed on the full text. 
+                Moreover, we assign dummy variables to the sentiment:
               </p>
+              <div class="div-list">
+                <ul>
+                  <li>
+                    <p class="project-details__desc-list_ele">&bull; positive = 1</p>
+                  </li>
+                  <li>
+                    <p class="project-details__desc-list_ele">&bull; neutral = 0</p>
+                  </li>
+                  <li>
+                    <p class="project-details__desc-list_ele">&bull; negative = -1</p>
+                  </li>
+                </ul>
+              </div>
+              
               <h3 class="project-details__content-title_1">Exploratory Data Analysis</h3>
               <p class="project-details__desc-para">
                 Our team began by analysing and understanding the provided data. 
