@@ -367,11 +367,50 @@
               alt="Project Image Hero"
               class="project-details__showcase-img"
               />
+              <h3 class="project-details__content-title_2">Scalability Argument</h3>
+              <p class="project-details__desc-para">
+                To justify our overall final winning model, we need to briefly introduce the scalability argument. 
+                We take into account the advantage of one-class models like GMM over multi-class models where adding one new network flow would only require one new model to be trained, 
+                whilst the same scenario for multi-class models like random forest would require the entire model to be retrained over the new set of network flows.
+              </p>
+              <p class="project-details__desc-para">
+                However, we believe that the trade-off between time and performance is worthwhile. 
+                Retraining the Random Forest would take ~10 minutes, and weighted average precision will be maintained at ~99%. 
+                Alternatively, retraining GMM will take ~1 minute but weighted average precision will only be at the level about 87%.
+              </p>
+              <p class="project-details__desc-para">
+                Considering that the overall problem context is within the cybersecurity area, we should prioritise the weighted average precision metric over the slightly inferior training and testing times of Random Forest with respect to GMM.
+              </p>
+              <p class="project-details__desc-para">
+                Thus, the winning model of our classification task is <b>Random Forest</b>.
+              </p>
+              <h3 class="project-details__content-title_1">Extending to Anomaly Detection</h3>
+              <p class="project-details__desc-para">
+                To integrate our ML solution into practice and extend its capabilities to anomaly detection we can simply observe if and when a particular flow's classification (or probability) deviates away from the actual flow in which the data is being collected from.
+              </p>
+              <h3 class="project-details__content-title_1">Best GMM and Random Forest - Confusion Matrix and Classification Report</h3>
+              <p class="project-details__desc-para">
+                Gaussian Mixture Models:
+              </p>
+              <img
+              src="./assets/jpeg/nad_gmm_cm.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
+              <p class="project-details__desc-para">
+                Random Forest:
+              </p>
+              <img
+              src="./assets/jpeg/nad_rf_cm.jpg"
+              alt="Project Image Hero"
+              class="project-details__showcase-img"
+              />
               
               
               
               
-
+              
+              
               
             </div> 
             <div class="project-details__tools-used">
