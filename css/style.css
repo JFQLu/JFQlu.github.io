@@ -497,6 +497,10 @@ textarea {
 .project-details__showcase-img {
   width: 100%; }
 
+.project-details__showcase-img_small {
+  width: 50%;
+  margin: auto;}
+
 .project-details__content-main {
   width: 100%;
   max-width: 70rem;
