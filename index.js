@@ -2,10 +2,9 @@
 const hamMenuBtn = document.querySelector('.header__main-ham-menu-cont')
 const smallMenu = document.querySelector('.header__sm-menu')
 const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
-const headerHamMenuCloseBtn = document.querySelector(
-  '.header__main-ham-menu-close'
-)
+const headerHamMenuCloseBtn = document.querySelector('.header__main-ham-menu-close')
 const headerSmallMenuLinks = document.querySelectorAll('.header__sm-menu-link')
+const projects_button = document.querySelector('.btn.btn--bg')
 
 hamMenuBtn.addEventListener('click', () => {
   if (smallMenu.classList.contains('header__sm-menu--active')) {
@@ -36,3 +35,15 @@ const headerLogoConatiner = document.querySelector('.header__logo-container')
 headerLogoConatiner.addEventListener('click', () => {
   location.href = 'index.html'
 })
+
+// Projects button DL push
+projects_button.addEventListener('click', (event) => { 
+  window.dataLayer = window.dataLayer || []
+  window.dataLayer.push({
+    'event' = 'projects_button_clicked'
+  });
+  console.log('Button clicked')
+});
+
+
+
