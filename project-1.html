@@ -238,7 +238,14 @@
                 <p>&emsp;print('Time taken to find optimal clusters:',optimal_k_time,'s')</p>
                 <p>&emsp;return optimal_k, optimal_k_time</p>
               </div>
-              
+              <p class="project-details__desc-para">
+                The above function returns us the optimal number of clusters optimal_k.
+              </p>
+              <h3 class="project-details__content-title_2">Model Training</h3>
+              <div class="div-code">
+                <p># Training a GMM using optimal number of clusters</p>    
+                <p>gmm, training_time= fit_gmm(train,optimal_k,random_state = random_state,flow_type = flow_type)</p>    
+              </div>
               
               
             </div> 
