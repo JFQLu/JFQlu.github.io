@@ -275,7 +275,55 @@
                 <p>&emsp;(5) For each test data point, select cluster model with minimum distance predicted as winner model;</p>
                 <p>&emsp;(6) Use winner model's flow as predictions;</p>
               </div>   
+              <p class="project-details__desc-para">
+                For single-class classifiers like GMM we need to produce a model for each class. 
+                Predicting with single-class models such as GMM is more complicated then multi-class models due to the need for conflict resolution when the probablity measures are the same for more than one class (network flow).
+              </p>
+              <h3 class="project-details__content-title_1">Random Forest</h3>
+              <p class="project-details__desc-para">
+                Random Forest (RF) is a supervised machine learning algorithm for classification and regression. 
+                It is an ensemble method meaning it combines the predictions of multiple decision trees trained on different subsets of the data, and makes a final prediction by taking the mode or mean of the individual predictions. 
+                It is effective at handling high-dimensional and sparse data, and is resistant to overfitting. It is also relatively easy to implement and interpret.
+              </p>
+              <h3 class="project-details__content-title_2">Preprocessing</h3>
+              <p class="project-details__desc-para">
+                Since RF is a supervised ML model we need to create labels in our feature data. This can be done by applying the following function to the data.
+              </p>
+              <div class="div-code">
+                <p>def convert_one_class_to_multi_class(df):</p>    
+                <p>&emsp;'''</p>    
+                <p>&emsp;This function converts the feature_subsequence dataset to make it suitable for multi-class.</p> 
+                <p>&emsp;Note that columns that are not relevant to features (such as time/device_mac) will be removed. </p> 
+                <p>&nbsp;</p>
+                <p>&emsp;It will change the shape of the dataset from "wide" to "long", with the flow types assigned as a separate new column.</p> 
+                <p>&emsp;NOTE: The input MUST be dataframe of features computed from subsequences.</p>
+                <p>&emsp;'''</p>
+                <p>&emsp;# Extract relevant column flow names, and feature names from the column names</p>
+                <p>&emsp;if 'time' in df.columns:</p>
+                <p>&emsp;&emsp;df = df.drop(['time'],axis=1)</p>
+                <p>&emsp;if 'device_mac' in df.columns:</p>
+                <p>&emsp;&emsp;df = df.drop(['device_mac'],axis=1)</p>
+                <p>&nbsp;</p>
+                <p>&emsp;cols = [c for c in df.columns]</p>
+                <p>&emsp;flows = [extract_flow_from_column(c) for c in cols]</p>
+                <p>&emsp;features = [extract_feature_from_column(c) for c in cols]</p>
+                <p>&nbsp;</p>
+                <p>&emsp;# Create a multi-level column with the extracted names</p>
+                <p>&emsp;new_columns = list(zip(flows,features,cols))</p>
+                <p>&emsp;df.columns=pd.MultiIndex.from_tuples(new_columns)</p>
+                <p>&emsp;# Stack the dataframe -</p>
+                <p>&emsp;# This will place the columns at the flow level, and original level into the rows. The end result will be our feature names will be the remaining columns</p>
+                <p>&emsp;df = df.stack(level= [0,2])</p>
+                <p>&emsp;# Condense the stacked dataframe by summing -</p>
+                <p>&emsp;# After stacking, there will be a lot of null values for observations that didn't exist.</p>
+                <p>&emsp;# We can get rid of these observations using a group by and sum, since the nulls will be treated as 0 in a sum operation.</p>
+                <p>&emsp;df = df.groupby(level = [0,1]).sum()</p>
+                <p>&emsp;# Finally, reset index and rename accordingly</p>
+                <p>&emsp;df = df.reset_index().drop('level_0',axis=1).rename({'level_1':'FlowType'},axis=1)</p>
+                <p>&emsp;return df</p>
+              </div>   
               
+‍
               
             </div> 
             <div class="project-details__tools-used">
