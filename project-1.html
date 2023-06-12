@@ -328,15 +328,23 @@
                 Once we have labelled data we can simply train the RF model using Sklearn's implementation.
               </p>
               <div class="div-code">
-                rf = RandomForestClassifier(n_estimators=n_trees, random_state=random_state).fit(X_train,y_train)
+                <p>rf = RandomForestClassifier(n_estimators=n_trees, random_state=random_state).fit(X_train,y_train)</p>
               </div>
               <h3 class="project-details__content-title_2">Model Testing</h3>
               <p class="project-details__desc-para">
                 Unlike GMM, only one model needs to be trained to classify all classes, no conflict resolution is required either. We only need one line to predict the class of any segment of network flow.
               </p>
               <div class="div-code">
-                y_pred = model.predict(X_test)
+                <p>y_pred = model.predict(X_test)</p>
               </div>
+              <h3 class="project-details__content-title_1">Experiment Results</h3>
+              <h3 class="project-details__content-title_2">Layer 1 Results</h3>
+              <p class="project-details__desc-para">
+                Best experiment results for each one-class model for layer 1
+              </p>
+              
+             
+              
               
               
               
