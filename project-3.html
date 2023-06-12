@@ -151,118 +151,59 @@
                   </li>
                 </ol>
               </div>
+              <p class="project-details__desc-para">
+                This process is repeated until the algorithm converges or a maximum number of supersteps is reached.
+              </p>
+              <p class="project-details__desc-para">
+                To solve our problem above we start by importing the required libraries.
+              </p>
+              <div class="div-code">
+                <p>import org.apache.spark.SparkContext</p>
+                <p>import org.apache.spark.SparkContext._</p>
+                <p>import org.apache.spark.SparkConf</p>
+                <p>import org.apache.spark.graphx._</p>
+              </div>
+              <p class="project-details__desc-para">
+                Next, we must define a vertex program. This is a user-defined function that is executed on each vertex in the graph. 
+                It takes as input the vertex ID, the current vertex data, and a message received by the vertex in the previous superstep, and it returns an updated vertex data. 
+                Here we have the vertex program take the message (newData) and merge it with the vertex data (origData) removing duplicates, i.e. we take the union of newData and origData.
+              </p>
+              <div class="div-code">
+                <p>// Vertex Program: merges vertex data (List[VertexId]) with message (List[VertexId]) removing duplicates </p>
+                <p>def vertexProgram(id: VertexId, origData: List[VertexId], newData: List[VertexId]) : List[VertexId] = ( origData ::: newData ).distinct</p>
+              </div>
+              <p class="project-details__desc-para">
+                We also define a mergeMsg function, this has no access to the context of any Vertex -- 
+                it just takes individual messages and creates a single message which is then sent to the vertex program as newData. 
+                Here we simply take the union of all messages.
+              </p>
+              <div class="div-code">
+                <p>def mergeMsg(list1: List[VertexId], list2: List[VertexId]) : List[VertexId] = (list1 ::: list2).distinct</p>
+              </div>
+              <p class="project-details__desc-para">
+                Finally, we define a sendMsg function, it takes as input the source and destination vertices of the edge, and it returns a message to be sent from the source vertex to the destination vertex. 
+                Here we first check if the vertex is reachable from itself. We also check if there are any messages that need to be added to srcAttr.
+              </p>
+              <div class="div-code">
+                <p>def sendMsg(triplet: EdgeTriplet[List[VertexId],Double]) : Iterator[(VertexId, List[VertexId])] = {</p>
+                <p>&emsp;// Append destination vertexId with destination vertexAttribute (List[VertexId]) and save to new val</p>
+                <p>&emsp;val newList = (triplet.dstId :: triplet.dstAttr).distinct</p>
+                <p>&nbsp;</p>
+                <p>&emsp;// Note that we are sending messages to the source vertex from the destination vertex (ie. we "flip" the direction of edges in the graph)</p>
+                <p>&emsp;// If source vertex is also reachable from destination vertex then the source node can reach itself</p>
+                <p>&emsp;if (triplet.srcAttr == triplet.dstAttr) {</p>
+                <p>&emsp;&emsp;Iterator((triplet.srcId, newList)</p>
+                <p>&emsp;// If the srcAttr list is the same length as the newList formed through recursion, then there is nothing new to add to the srcAttr list</p>
+                <p>&emsp;} else if (triplet.srcAttr.intersect(newList).length != newList.length) {</p>
+                <p>&emsp;&emsp;Iterator((triplet.srcId, newList))</p>
+                <p>&emsp;} else {</p>
+                <p>&emsp;&emsp;Iterator.empty</p>
+                <p>&emsp;}</p>
+                <p>}</p>
+              </div>
               
               
-            
               
-             
-              <img
-                src="./assets/jpeg/tsa_eda_tweet_length.jpg"
-                alt="Project Image Hero"
-                class="project-details__showcase-img"
-              />
-              <p class="project-details__desc-para">
-                and word count distributions,
-              </p>
-              <div class="div-code">
-                <p>plt.figure(figsize=(16, 4))</p>
-                <p>plt.subplot(1, 3, 1)</p>
-                <p>df_train.query("sentiment==-1").text.map(lambda x: len(x.split())).plot(kind="hist", title="Negative")</p>
-                <p>plt.xlabel('Number of Words')</p>
-                <p>&nbsp;</p>
-                <p>plt.subplot(1, 3, 2)</p>
-                <p>df_train.query("sentiment==0").text.map(lambda x: len(x.split())).plot(kind="hist", title="Neutral")</p>
-                <p>plt.xlabel('Number of Words')</p>
-                <p>&nbsp;</p>
-                <p>plt.subplot(1, 3, 3)</p>
-                <p>df_train.query("sentiment==1").text.map(lambda x: len(x.split())).plot(kind="hist", title="Positive")</p>
-                <p>plt.xlabel('Number of Words')</p>
-                <p>&nbsp;</p>
-                <p>plt.show()</p>
-              </div>
-              <img
-                src="./assets/jpeg/tsa_eda_tweet_length.jpg"
-                alt="Project Image Hero"
-                class="project-details__showcase-img"
-              />
-              <p class="project-details__desc-para">
-                We see from this that there is little difference in terms of number of characters or words across each sentiment.
-              </p>
-              <h3 class="project-details__content-title_1">Preprocessing</h3>
-              <h3 class="project-details__content-title_2">Decontraction</h3>
-              <p class="project-details__desc-para">
-                Decontraction is the process of converting contractions, which are shortened forms of words or phrases, back to their full form. For example, "I'm" would be converted to "I am".
-              </p>
-              <p class="project-details__desc-para">
-                Decontraction is important in natural language processing (NLP) because it helps to normalize the text and make it easier for NLP models to process and understand. 
-                Contractions can be ambiguous and can have multiple meanings depending on the context in which they are used. We perform decontraction manually using the following code.
-              </p>
-              <div class="div-code">
-                <p>def decontraction_text(text):</p>
-                <p>&emsp;# performing de-contraction</p>
-                <p>&emsp;text = text.replace(",000,000", "m").replace(",000", "k").replace("′", "'").replace("’", "'").replace("`", "'")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("won't", "will not").replace("cannot", "can not").replace("can't", "can not")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("n't", " not").replace("what's", "what is").replace("it's", "it is")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ve", " have").replace("i'm", "i am").replace("'re", " are")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("he's", "he is").replace("she's", "she is").replace("'s", " is")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'m", " am").replace("'d", " would")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ll", " will")\</p>
-                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ll", " will")</p>
-                <p>&emsp;return text</p>
-                <p>df_train['text']= df_train['text'].apply(lambda x : decontraction_text(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x: decontraction_text(x))</p>
-                <p>df_train.head()</p>
-              </div>
-              <h3 class="project-details__content-title_2">Lemmatization</h3>
-              <p class="project-details__desc-para">
-                Lemmatization is another useful preprocessing technique for NLP. Lemmatization is the process of reducing a word to its base form, or lemma. 
-                For example, the lemma of the word "was" is "be," and the lemma of the word "better" is "good."
-              </p>
-              <p class="project-details__desc-para">
-                Lemmatization is important in natural language processing (NLP) because it helps to reduce the dimensionality of the data and make it easier for NLP models to process and understand. 
-                It does this by reducing the number of unique word forms that need to be considered, which can make it easier to identify common themes and patterns in the text. 
-                The code to do this is below using the nltk implementation.
-              </p>
-              <div class="div-code">
-                <p>from nltk.stem import WordNetLemmatizer</p>
-                <p>lemmatizer = WordNetLemmatizer()</p>
-                <p>def lemma_stem(x):</p>
-                <p>&emsp;new = ""</p>
-                <p>&emsp;for y in x.split():</p>
-                <p>&emsp;&emsp;lemmatizer.lemmatize(y)</p>
-                <p>&emsp;&emsp;new = new + y + " "</p>
-                <p>&emsp;return new.rstrip()</p>
-                <p>&nbsp;</p>
-                <p>df_train['text'] = df_train['text'].apply(lambda x:lemma_stem(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x: lemma_stem(x))</p>
-              </div>
-              <h3 class="project-details__content-title_2">Removing URLs</h3>
-              <p class="project-details__desc-para">
-                Next we can remove URLs as they do not provide useful information,
-              </p>
-              <div class="div-code">
-                <p>def remove_URLs(text):</p>
-                <p>&emsp;return re.sub(r'http\S+', ' ', text,  flags=re.MULTILINE)</p>
-                <p>&emsp;for y in x.split():</p>
-                <p>df_train['text']= df_train['text'].apply(lambda x : remove_URLs(x))</p>
-              </div>
-              <h3 class="project-details__content-title_2">Removing Punctuations</h3>
-              <p class="project-details__desc-para">
-                Whether or not to remove punctuations in natural language processing (NLP) tasks depends on the specific task and the type of punctuation being used. 
-                In some cases, punctuations can be useful for understanding the meaning of the text and should be retained. 
-                In other cases, punctuations may not be necessary and can be removed as a preprocessing step.
-              </p>
-              <p class="project-details__desc-para">
-                In our case I choose to remove punctuations to reduce the complexity of the final models and given the context of short tweets, punctuations may not be very useful.
-              </p>
-              <div class="div-code">
-                <p>def lower_text_and_remove_special_chars(text):</p>
-                <p>&emsp;text = text.lower().strip()</p>
-                <p>&emsp;return re.sub(r"\W+", " ", text)</p>
-                <p>&nbsp;</p>
-                <p>df_train['text']= df_train['text'].apply(lambda x : lower_text_and_remove_special_chars(x))</p>
-                <p>df_test['text'] = df_test['text'].apply(lambda x: lower_text_and_remove_special_chars(x))</p>
-              </div>
               <h3 class="project-details__content-title_2">Removing HTML tags</h3>
               <p class="project-details__desc-para">
                 HTML tags should be removed as they do not provide information on the sentiment of a tweet.
