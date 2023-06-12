@@ -4,7 +4,7 @@ const smallMenu = document.querySelector('.header__sm-menu')
 const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
 const headerHamMenuCloseBtn = document.querySelector('.header__main-ham-menu-close')
 const headerSmallMenuLinks = document.querySelectorAll('.header__sm-menu-link')
-const projects_button = document.querySelector('.btn.btn--bg')
+const projects_button = document.querySelector('.btn')
 
 hamMenuBtn.addEventListener('click', () => {
   if (smallMenu.classList.contains('header__sm-menu--active')) {
@@ -40,6 +40,7 @@ headerLogoConatiner.addEventListener('click', () => {
 projects_button.addEventListener('click', (event) => { 
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
+    'event': 'button_click'
     'button_name': 'projects_button'
   });
   console.log('Button clicked')
