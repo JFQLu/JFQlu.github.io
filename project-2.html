@@ -382,7 +382,18 @@
                 <p>Ng_sent = df_train[df_train['sentiment']==-1]</p>
                 <p>Nt_sent = df_train[df_train['sentiment']==0]</p>
               </div>
-              
+              <p class="project-details__desc-para">
+                Now we look at the most common words for each class.
+              </p>
+              <div class="div-code">
+                <p>from collections import Counter</p>
+                <p># Most common words for each sentiment</p>
+                <p>for sentiment in [(Pt_sent, 'Greens'), (Nt_sent, 'Blues'), (Ng_sent, 'Reds')]:</p>
+                <p>&emsp;top = Counter([item for sublist in sentiment[0]['temp_list'] for item in sublist])</p>
+                <p>&emsp;temp_sent = pd.DataFrame(top.most_common(20))</p>
+                <p>&emsp;temp_sent.columns = ['Common_words','count']</p>
+                <p>&emsp;display(temp_sent.style.background_gradient(cmap=sentiment[1]))</p>
+              </div>
               
               
               
