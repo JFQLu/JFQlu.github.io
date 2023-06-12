@@ -277,9 +277,18 @@
                 <p>&emsp;&emsp;lemmatizer.lemmatize(y)</p>
                 <p>&emsp;&emsp;new = new + y + " "</p>
                 <p>&emsp;return new.rstrip()</p>
+                <p>&nbsp;</p>
+                <p>df_train['text'] = df_train['text'].apply(lambda x:lemma_stem(x))</p>
+                <p>df_test['text'] = df_test['text'].apply(lambda x: lemma_stem(x))</p>
               </div>
-
+              
+              
+            
              
+              
+              
+              
+              
               
               <h3 class="project-details__content-title_1">Feature Engineering</h3>
               <p class="project-details__desc-para">
