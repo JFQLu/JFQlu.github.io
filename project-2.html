@@ -281,11 +281,33 @@
                 <p>df_train['text'] = df_train['text'].apply(lambda x:lemma_stem(x))</p>
                 <p>df_test['text'] = df_test['text'].apply(lambda x: lemma_stem(x))</p>
               </div>
-              
-              
-            
-             
-              
+              <h3 class="project-details__content-title_2">Removing URLs</h3>
+              <p class="project-details__desc-para">
+                Next we can remove URLs as they do not provide useful information,
+              </p>
+              <div class="div-code">
+                <p>def remove_URLs(text):</p>
+                <p>&emsp;return re.sub(r'http\S+', ' ', text,  flags=re.MULTILINE)</p>
+                <p>&emsp;for y in x.split():</p>
+                <p>df_train['text']= df_train['text'].apply(lambda x : remove_URLs(x))</p>
+              </div>
+              <h3 class="project-details__content-title_2">Removing Punctuations</h3>
+              <p class="project-details__desc-para">
+                Whether or not to remove punctuations in natural language processing (NLP) tasks depends on the specific task and the type of punctuation being used. 
+                In some cases, punctuations can be useful for understanding the meaning of the text and should be retained. 
+                In other cases, punctuations may not be necessary and can be removed as a preprocessing step.
+              </p>
+              <p class="project-details__desc-para">
+                In our case I choose to remove punctuations to reduce the complexity of the final models and given the context of short tweets, punctuations may not be very useful.
+              </p>
+              <div class="div-code">
+                <p>def lower_text_and_remove_special_chars(text):</p>
+                <p>&emsp;text = text.lower().strip()</p>
+                <p>&emsp;return re.sub(r"\W+", " ", text)</p>
+                <p>&nbsp;</p>
+                <p>df_train['text']= df_train['text'].apply(lambda x : lower_text_and_remove_special_chars(x))</p>
+                <p>df_test['text'] = df_test['text'].apply(lambda x: lower_text_and_remove_special_chars(x))</p>
+              </div>
               
               
               
