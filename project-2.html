@@ -230,10 +230,40 @@
                 alt="Project Image Hero"
                 class="project-details__showcase-img"
               />
+              <p class="project-details__desc-para">
+                We see from this that there is little difference in terms of number of characters or words across each sentiment.
+              </p>
+              <h3 class="project-details__content-title_1">Preprocessing</h3>
+              <h3 class="project-details__content-title_2">Decontraction</h3>
+              <p class="project-details__desc-para">
+                Decontraction is the process of converting contractions, which are shortened forms of words or phrases, back to their full form. For example, "I'm" would be converted to "I am".
+              </p>
+              <p class="project-details__desc-para">
+                Decontraction is important in natural language processing (NLP) because it helps to normalize the text and make it easier for NLP models to process and understand. 
+                Contractions can be ambiguous and can have multiple meanings depending on the context in which they are used. We perform decontraction manually using the following code.
+              </p>
+              <div class="div-code">
+                <p>def decontraction_text(text):</p>
+                <p># performing de-contraction</p>
+                <p>text = text.replace(",000,000", "m").replace(",000", "k").replace("′", "'").replace("’", "'").replace("`", "'")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("won't", "will not").replace("cannot", "can not").replace("can't", "can not")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("n't", " not").replace("what's", "what is").replace("it's", "it is")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ve", " have").replace("i'm", "i am").replace("'re", " are")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("he's", "he is").replace("she's", "she is").replace("'s", " is")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'m", " am").replace("'d", " would")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ll", " will")\</p>
+                <p>&emsp;&emsp;&nbsp;&nbsp;&nbsp;.replace("'ll", " will")</p>
+                <p>return text</p>
+              </div>
               
-            
+              
+              
 
-              
+            
+    
+df_train['text']= df_train['text'].apply(lambda x : decontraction_text(x))
+df_test['text'] = df_test['text'].apply(lambda x: decontraction_text(x))
+df_train.head()
               
               
               <h3 class="project-details__content-title_1">Feature Engineering</h3>
@@ -258,11 +288,6 @@
                 <p>&emsp;temp = np.array(temp).sum(axis=-2)</p>    
                 <p>&emsp;return temp</p>
               </div>
-              
-             
-              
-              
-              
               <h3 class="project-details__content-title_1">Model Training</h3>
               <p class="project-details__desc-para">
                 For this project we wanted to compare the effectiveness and logistics of both single-class and multi-class machine learning models in classifying network flows. 
