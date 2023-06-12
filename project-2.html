@@ -373,6 +373,15 @@
                 <p>df_train['text'] = df_train['text'].apply(lambda x:remove_stopword(x))</p>
                 <p>df_test['text'] = df_test['text'].apply(lambda x:remove_stopword(x))</p>
               </div>
+              <h3 class="project-details__content-title_1">Post-Preprocessing Data Exploration</h3>
+              <p class="project-details__desc-para">
+                Now that preprocessing has been done we have a look at the most common words in each sentiment class. First, lets separate the sentiments.
+              </p>
+              <div class="div-code">
+                <p>Pt_sent = df_train[df_train['sentiment']==1]</p>
+                <p>Ng_sent = df_train[df_train['sentiment']==-1]</p>
+                <p>Nt_sent = df_train[df_train['sentiment']==0]</p>
+              </div>
               
               
               
