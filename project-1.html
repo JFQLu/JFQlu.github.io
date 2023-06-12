@@ -246,6 +246,35 @@
                 <p># Training a GMM using optimal number of clusters</p>    
                 <p>gmm, training_time= fit_gmm(train,optimal_k,random_state = random_state,flow_type = flow_type)</p>    
               </div>
+              <p class="project-details__desc-para">
+                The model is trained using Sklearn's implementation of GMM. This model is then stored for testing.
+              </p>
+              <h3 class="project-details__content-title_2">Model Testing</h3>
+              <p class="project-details__desc-para">
+                Testing the GMM follows the following algorithm:
+              </p>
+              <div class="div-code">
+                <p>INPUT:</p>    
+                <p>&emsp;Test feature data of same subsequence size as training feature data</p>    
+                <p>&emsp;Set of trained GMM classification models</p> 
+                <p>&emsp;Z-score scaler if scale = True</p> 
+                <p>&emsp;PCA scaler if PCA = True</p> 
+                <p>&nbsp;</p>
+                <p>OUTPUT:</p> 
+                <p>&emsp;Network flow predictions on test feature data</p>
+                <p>&nbsp;</p>
+                <p>ALGORITHM:</p>
+                <p>&emsp;for each network flow do:</p>
+                <p>&emsp;&emsp;(1) if scale = True then</p>
+                <p>&emsp;&emsp;&emsp;Scale each feature from test data using z-score scalar from training data;</p>
+                <p>&emsp;&emsp;(2) if PCA = True then</p>
+                <p>&emsp;&emsp;&emsp;Obtain principal components using PCA scalar on features and reduce dimensions using minimal principal components;</p>
+                <p>&emsp;&emsp;(3) Predict closest cluster to step 1 and 2 result, using all cluster models;</p>
+                <p>&emsp;&emsp;(4) Record distance between all closest clusters and step 1 and 2 result;</p>
+                <p>&emsp;end</p>
+                <p>&emsp;(5) For each test data point, select cluster model with minimum distance predicted as winner model;</p>
+                <p>&emsp;(6) Use winner model's flow as predictions;</p>
+              </div>   
               
               
             </div> 
