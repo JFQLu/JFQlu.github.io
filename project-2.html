@@ -341,9 +341,40 @@
                 <p>df_train['text']=df_train['text'].apply(lambda x : correct_spellings(x))</p>
                 <p>df_test['text'] = df_test['text'].apply(lambda x: correct_spellings(x))</p>
               </div>
+              <h3 class="project-details__content-title_2">Removing Stop Words</h3>
+              <p class="project-details__desc-para">
+                Finally, we remove stop words such as "in", "on", "with", "by" and "for" since these do not provide much information on the sentiment of tweets and will only add unnecessary complexity to our models.
+              </p>
+              <p class="project-details__desc-para">
+                First, we create a string version containing a list of words for further EDA,
+              </p>
+              <div class="div-code">
+                <p>df_train['temp_list'] = df_train['text'].apply(lambda x:str(x).split())</p>
+                <p>&nbsp;</p>
+                <p># Str version for EDA</p>
+                <p>def correct_spellings(text):</p>
+                <p>def remove_stopword(x):</p>
+                <p>&emsp;return [y for y in x if y not in stopwords.words('english')]</p>
+                <p>&emsp;df_train['temp_list'] = df_train['temp_list'].apply(lambda x:remove_stopword(x))</p>
+              </div>
+              <p class="project-details__desc-para">
+                we also create a text version which will be used for TF-IDF vectorisation later.
+              </p>
+              <div class="div-code">
+                <p># Text version for tfidf vectorisation</p>
+                <p>import nltk</p>
+                <p>nltk.download('stopwords')</p>
+                <p>def remove_stopword(x):</p>
+                <p>&emsp;new = ""</p>
+                <p>&emsp;for y in x.split():</p>
+                <p>&emsp;&emsp;if y not in stopwords.words('english'):</p>
+                <p>&emsp;&emsp;&emsp;new = f'{new}{y} '</p>
+                <p>&emsp;return new.rstrip()</p>
+                <p>df_train['text'] = df_train['text'].apply(lambda x:remove_stopword(x))</p>
+                <p>df_test['text'] = df_test['text'].apply(lambda x:remove_stopword(x))</p>
+              </div>
               
               
-            
               
               
               <h3 class="project-details__content-title_1">Feature Engineering</h3>
