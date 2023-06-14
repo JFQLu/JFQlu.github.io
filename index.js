@@ -40,7 +40,7 @@ headerLogoConatiner.addEventListener('click', () => {
 projects_button.addEventListener('click', (event) => { 
   window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
-    'event': 'button_click'
+    'event': 'button_click',
     'button_name': 'projects_button'
   });
 });
