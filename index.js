@@ -49,6 +49,7 @@ projects_button.forEach(item => {
   var button_name = "(not_set)"
   console.log(item)
   if (item.innerText == 'PROJECTS') {
+    console.log('Projectssss')
     button_name = 'PROJECTS'
   } else if (item.innerTest == 'VIEW') {
     console.log('VIEWW----- ')
