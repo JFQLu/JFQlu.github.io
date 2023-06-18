@@ -48,7 +48,7 @@ headerLogoConatiner.addEventListener('click', () => {
 projects_button.forEach(item => {
   var button_name = "(not_set)"
   if (item.innerText == 'PROJECTS') {
-    button_name = PROJECTS
+    button_name = 'PROJECTS'
   } else if (item.innerTest == 'VIEW') {
     button_name = item.parentElement.querySelector('h3').textContent;
   }
