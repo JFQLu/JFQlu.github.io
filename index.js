@@ -48,6 +48,7 @@ headerLogoConatiner.addEventListener('click', () => {
 projects_button.forEach(item => {
   var button_name = "(not_set)"
   console.log(item)
+  item.innerTest
   if (item.innerText == 'PROJECTS') {
     console.log('Projectssss')
     button_name = 'PROJECTS'
