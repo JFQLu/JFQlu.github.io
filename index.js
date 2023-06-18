@@ -48,10 +48,11 @@ projects_button.addEventListener('click', (event) => {
 // View project details DL push
 projects_detail_button.forEach(item => { 
   console.log(item)
+  var button_name = item.siblings('h3').first();
   item.addEventListener('click', (event) => {
     window.dataLayer.push({
       'event': 'button_click',
-      'button_name': _
+      'button_name': button_name
     })
   }) 
 })
