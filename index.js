@@ -47,13 +47,9 @@ headerLogoConatiner.addEventListener('click', () => {
 // View project details DL push
 projects_button.forEach(item => {
   var button_name = "(not_set)"
-  console.log(item)
-  console.log(item.innerText)
   if (item.innerText == 'PROJECTS') {
-    console.log('Projectssss')
     button_name = 'PROJECTS'
-  } else if (item.innerTest == 'VIEW') {
-    console.log('VIEWW----- ')
+  } else if (item.innerText == 'VIEW') {
     button_name = item.parentElement.querySelector('h3').textContent;
   }
   item.addEventListener('click', (event) => {
