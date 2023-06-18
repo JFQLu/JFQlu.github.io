@@ -47,7 +47,7 @@ projects_button.addEventListener('click', (event) => {
 
 // View project details DL push
 projects_detail_button.forEach(item => {
-  var button_name = $(item).siblings('h3').first().text();
+  var button_name = item.parentElement.querySelector('h3').textContent;
   item.addEventListener('click', (event) => {
     window.dataLayer.push({
       'event': 'button_click',
