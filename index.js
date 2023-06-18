@@ -5,6 +5,7 @@ const headerHamMenuBtn = document.querySelector('.header__main-ham-menu')
 const headerHamMenuCloseBtn = document.querySelector('.header__main-ham-menu-close')
 const headerSmallMenuLinks = document.querySelectorAll('.header__sm-menu-link')
 const projects_button = document.querySelector('.btn')
+const projects_detail_button = doccument.querySelectorAll('.btn.btn--med')
 
 hamMenuBtn.addEventListener('click', () => {
   if (smallMenu.classList.contains('header__sm-menu--active')) {
@@ -38,12 +39,23 @@ headerLogoConatiner.addEventListener('click', () => {
 
 // Projects button DL push
 projects_button.addEventListener('click', (event) => { 
-  window.dataLayer = window.dataLayer || []
   window.dataLayer.push({
     'event': 'button_click',
     'button_name': 'projects_button'
-  });
-});
+  })
+})
+
+// View project details DL push
+projects_detail_button.forEach(item => { 
+  console.log(item)
+  item.addEventListener('click', (event) => {
+    window.dataLayer.push({
+      'event': 'button_click',
+      'button_name': _
+    })
+  }) 
+})
+
 
 
 
