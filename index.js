@@ -44,14 +44,15 @@ headerLogoConatiner.addEventListener('click', () => {
 //   })
 // })
 
-// View project details DL push
+// Button Click dataLayer pushes
 projects_button.forEach(item => {
   var button_name = "(not_set)"
-  if (item.innerText == 'PROJECTS') {
-    button_name = 'PROJECTS'
-  } else if (item.innerText == 'VIEW') {
+  var innerText = item.innerText
+  if (innerText == 'PROJECTS' || innerText == 'CONTACT') {
+    button_name = item.innerText
+  } else if (innerText == 'VIEW') {
     button_name = item.parentElement.querySelector('h3').textContent;
-  }
+  } 
   item.addEventListener('click', (event) => {
     window.dataLayer.push({
       'event': 'button_click',
