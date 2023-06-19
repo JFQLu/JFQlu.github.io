@@ -45,21 +45,21 @@ headerLogoConatiner.addEventListener('click', () => {
 // })
 
 // Button Click dataLayer pushes
-projects_button.forEach(item => {
-  var button_name = "(not_set)"
-  var innerText = item.innerText
-  if (innerText == 'PROJECTS' || innerText == 'CONTACT') {
-    button_name = item.innerText
-  } else if (innerText == 'VIEW') {
-    button_name = item.parentElement.querySelector('h3').textContent;
-  } 
-  item.addEventListener('click', (event) => {
-    window.dataLayer.push({
-      'event': 'button_click',
-      'button_name': button_name
-    });
-  });
-});
+// projects_button.forEach(item => {
+//   var button_name = "(not_set)"
+//   var innerText = item.innerText
+//   if (innerText == 'PROJECTS' || innerText == 'CONTACT') {
+//     button_name = item.innerText
+//   } else if (innerText == 'VIEW') {
+//     button_name = item.parentElement.querySelector('h3').textContent;
+//   } 
+//   item.addEventListener('click', (event) => {
+//     window.dataLayer.push({
+//       'event': 'button_click',
+//       'button_name': button_name
+//     });
+//   });
+// });
 
 
 
