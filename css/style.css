@@ -229,16 +229,10 @@ textarea {
       height: unset;
       min-height: unset; } }
   .home-hero__socials {
-    position: absolute;
-    top: 50%;
-    border: 2px solid #eee;
-    border-left: 2px solid #eee;
-    margin-bottom: 3rem;
-    text-align: center;
-    transform: translateY(-50%); }
-    @media only screen and (max-width: 56.25em) {
-      .home-hero__socials {
-        display: none; } }
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
   .home-hero__mouse-scroll-cont {
     position: absolute;
     bottom: 3%;
