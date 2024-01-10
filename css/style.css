@@ -232,10 +232,7 @@ textarea {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 5rem;
-    @media only screen and (max-width: 56.25em) {
-      .home-hero__socials {
-        display: none; } }
+    margin-top: 5rem }
   .home-hero__mouse-scroll-cont {
     position: absolute;
     bottom: 3%;
